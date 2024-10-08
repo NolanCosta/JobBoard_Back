@@ -17,7 +17,10 @@ return new class extends Migration
             $table->enum('type', ['CDI', 'CDD', 'INTERIM', 'FREELANCE', 'INTERNSHIP', 'APPRENTICESHIP']);
             $table->string('sector');
             $table->text('description');
-            $table->json('tags');
+            $table->string('wage')->nullable();
+            $table->string('working_time')->nullable();
+            $table->json('skills')->nullable();
+            $table->json('tags')->nullable();
             $table->string('zip_code');
             $table->string('city');
             $table->enum('status', ['PUBLISHED', 'STANDBY', 'ARCHIVED'])->default('PUBLISHED');
