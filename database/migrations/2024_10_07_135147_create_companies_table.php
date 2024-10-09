@@ -19,6 +19,7 @@ return new class extends Migration
             $table->string('zip_code');
             $table->string('city');
             $table->text('aboutUs');
+            $table->json('collaborators')->nullable();
             $table->foreignId('user_id')
                 ->nullable()
                 ->constrained()

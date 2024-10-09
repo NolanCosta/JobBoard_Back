@@ -16,6 +16,7 @@ class Company extends Model
         'zip_code',
         'city',
         'aboutUs',
+        'collaborators',
         'user_id',
     ];
 }
