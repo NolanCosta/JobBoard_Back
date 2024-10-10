@@ -35,28 +35,25 @@ class UserController extends Controller
 
     public function auth(Request $request)
     {
-        try {
-            $request->validate([
-                'email' => 'required|email',
-                'password' => 'required|string',
-            ]);
+        $request->validate([
+            'email' => 'required|email',
+            'password' => 'required|string',
+        ]);
 
-            $user = User::where('email', $request->email)->first();
+        $user = User::where('email', $request->email)->first();
 
-            if (!$user || !password_verify($request->password, $user->password)) {
-                return response()->json(['message' => 'Unauthorized'], 401);
-            }
-
-            $token = $user->createToken('auth_token')->plainTextToken;
-
-            return response()->json([
-                'user' => $user,
-                'token' => $token],
-                200
-            );
-        } catch (\Exception $e) {
-            return response()->json(['message' => $e->getMessage()], 500);
+        if (!$user || !password_verify($request->password, $user->password)) {
+            return response()->json(['message' => 'Email ou mot de passe invalide'], 401);
         }
+
+        $token = $user->createToken('auth_token')->plainTextToken;
+
+        return response()->json([
+            'message' => 'Connexion réussie',
+            'user' => $user,
+            'token' => $token],
+            200
+        );
     }
 
     public function logout(Request $request)
