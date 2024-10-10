@@ -16,7 +16,6 @@ class UserController extends Controller
                 'email' => 'required|email|unique:users',
                 'phone' => 'required|string',
                 'password' => 'required|string',
-                'role' => 'required|string',
             ]);
 
             $user = User::create([
@@ -25,7 +24,7 @@ class UserController extends Controller
                 'email' => $request->email,
                 'phone' => $request->phone,
                 'password' => bcrypt($request->password),
-                'role' => 0,
+                'role' => 'USER',
             ]);
 
             return response()->json($user, 201);
