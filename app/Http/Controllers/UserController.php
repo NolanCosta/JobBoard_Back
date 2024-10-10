@@ -27,7 +27,7 @@ class UserController extends Controller
                 'role' => 'USER',
             ]);
 
-            return response()->json($user, 201);
+            return response()->json(['message' => 'Utilisateur créé avec succès', 201]);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
