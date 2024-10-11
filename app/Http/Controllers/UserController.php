@@ -61,7 +61,7 @@ class UserController extends Controller
         try {
             $request->user()->currentAccessToken()->delete();
 
-            return response()->json(['message' => 'Logged out'], 200);
+            return response()->json(['message' => 'Déconnexion réussie'], 200);
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
