@@ -19,10 +19,10 @@ class DatabaseSeeder extends Seeder
     {
         $this->call([
 
+            UsersTableSeeder::class,
             CompaniesTableSeeder::class,
             AdvertisementsTableSeeder::class,
             FollowAdvertisementsTableSeeder::class,
-            UsersTableSeeder::class,
              
             
         ]);
