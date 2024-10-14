@@ -23,7 +23,7 @@ class CompaniesTableSeeder extends Seeder
                 'zip_code' => '75001',
                 'city' => 'Paris',
                 'aboutUs' => 'Nous sommes des pionniers dans les solutions tech modernes, offrant des services novateurs pour les entreprises du monde entier.',
-                'collaborators' => json_encode(['John Doe', 'Jane Smith', 'Richard Roe']),
+                'collaborators' => json_encode([2, 3]),
                 'user_id' => 1, // Assure-toi que cet ID correspond à un utilisateur existant dans ta table `users`
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -35,7 +35,7 @@ class CompaniesTableSeeder extends Seeder
                 'zip_code' => '69001',
                 'city' => 'Lyon',
                 'aboutUs' => 'Un studio de design axé sur la création visuelle innovante et l\'expérience utilisateur exceptionnelle.',
-                'collaborators' => json_encode(['Alice Dupont', 'Bob Martin']),
+                'collaborators' => json_encode([4]),
                 'user_id' => 2, // ID de l'utilisateur propriétaire de cette entreprise
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -47,7 +47,7 @@ class CompaniesTableSeeder extends Seeder
                 'zip_code' => '75008',
                 'city' => 'Paris',
                 'aboutUs' => 'Nous offrons des solutions d\'énergie verte et durable pour les entreprises à travers l\'Europe.',
-                'collaborators' => json_encode(['Marc Leclerc', 'Sophie Moreau', 'Julie Verne']),
+                'collaborators' => json_encode([1,4]),
                 'user_id' => 3, // ID de l'utilisateur propriétaire
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -59,7 +59,7 @@ class CompaniesTableSeeder extends Seeder
                 'zip_code' => '13001',
                 'city' => 'Marseille',
                 'aboutUs' => 'Un groupe de professionnels de la santé offrant des services et conseils spécialisés pour les hôpitaux et cliniques.',
-                'collaborators' => json_encode(['Dr. Claire Dubois', 'Dr. Henri Dupont']),
+                'collaborators' => json_encode([1,2]),
                 'user_id' => 4, // ID de l'utilisateur
                 'created_at' => now(),
                 'updated_at' => now(),
