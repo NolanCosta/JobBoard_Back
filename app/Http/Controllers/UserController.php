@@ -66,4 +66,29 @@ class UserController extends Controller
             return response()->json(['message' => $e->getMessage()], 500);
         }
     }
+
+    public function index()
+    {
+        $users = user::all();
+        return $users;
+    }
+
+    public function update(Request $request, $id)
+    {
+        $user = User::findOrFail($id);
+        $user->update($request->all());
+
+        return $user;
+    }
+
+    public function destroy($id)
+    {
+        $user = User::findOrFail($id);
+        $user->delete();
+
+        return response()->json(['message' => 'User deleted successfully.'], 200);
+    }
+
+
+   
 }

@@ -18,11 +18,12 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $this->call([
-
+            
+            UsersTableSeeder::class,
             CompaniesTableSeeder::class,
             AdvertisementsTableSeeder::class,
             FollowAdvertisementsTableSeeder::class,
-            UsersTableSeeder::class,
+           
              
             
         ]);
