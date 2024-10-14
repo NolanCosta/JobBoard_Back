@@ -42,7 +42,8 @@ class CompanyController extends Controller
                 ]);
 
                 $request->user()->update([
-                    'company_id' => $company->id
+                    'company_id' => $company->id,
+                    'role' => 'PRO'
                 ]);
 
                 return response()->json(['message' => 'Companie créée avec succès'], 201);
@@ -56,7 +57,8 @@ class CompanyController extends Controller
                 ]);
 
                 $request->user()->update([
-                    'company_id' => $request->company_id
+                    'company_id' => $request->company_id,
+                    'role' => 'PRO'
                 ]);
 
                 $company = Company::where('id', $request->company_id)->first();
