@@ -16,8 +16,7 @@ class CompanyController extends Controller
 
     public function store(Request $request)
     {
-
-        if ($request->type === true) {
+        if ($request->type === 'true') {
             try {
                 $request->validate([
                     'name' => 'required|string',
@@ -94,5 +93,18 @@ class CompanyController extends Controller
         }
 
         return response()->json($company, 200);
+    }
+
+    public function destroy($id)
+    {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Companie non trouvée'], 404);
+        }
+
+        $company->delete();
+
+        return response()->json(['message' => 'Companie supprimée avec succès'], 200);
     }
 }
