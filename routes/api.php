@@ -8,6 +8,7 @@ use App\Http\Controllers\CompanyController;
 Route::post('user/register', [UserController::class, 'store']);
 Route::post('user/login', [UserController::class, 'auth']);
 Route::get('company', [CompanyController::class, 'index']);
+Route::get('company/{id}', [CompanyController::class, 'show']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', function (Request $request) {

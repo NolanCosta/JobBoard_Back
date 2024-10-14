@@ -84,4 +84,15 @@ class CompanyController extends Controller
             }
         }
     }
+
+    public function show($id)
+    {
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Companie non trouvée'], 404);
+        }
+
+        return response()->json($company, 200);
+    }
 }
