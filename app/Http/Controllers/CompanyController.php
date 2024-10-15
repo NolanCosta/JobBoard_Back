@@ -97,6 +97,33 @@ class CompanyController extends Controller
         return response()->json($company, 200);
     }
 
+    public function update(Request $request, $id)
+    {
+        $request->validate([
+            'name' => 'required|string',
+            'address' => 'required|string',
+            'zipCode' => 'required|integer',
+            'city' => 'required|string',
+            'description' => 'required|string',
+        ]);
+
+        $company = Company::find($id);
+
+        if (!$company) {
+            return response()->json(['message' => 'Companie non trouvée'], 404);
+        }
+
+        $company->update([
+            'name' => $request->name,
+            'address' => $request->address,
+            'zip_code' => $request->zipCode,
+            'city' => $request->city,
+            'aboutUs' => $request->description,
+        ]);
+
+        return response()->json(['message' => 'Companie modifiée avec succès'], 200);
+    }
+
     public function destroy($id)
     {
         $company = Company::find($id);
