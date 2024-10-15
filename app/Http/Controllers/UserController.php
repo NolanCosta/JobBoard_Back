@@ -7,6 +7,12 @@ use App\Models\User;
 
 class UserController extends Controller
 {
+    public function index ()
+    {
+        $users = User::all();
+        return response()->json($users, 200);
+    }
+    
     public function store(Request $request)
     {
         try {
@@ -65,5 +71,18 @@ class UserController extends Controller
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
+    }
+
+    public function destroy($id)
+    {
+        $user = User::find($id);
+
+        if (!$user) {
+            return response()->json(['message' => 'Utilisateur non trouvé'], 404);
+        }
+
+        $user->delete();
+
+        return response()->json(['message' => 'Utilisateur supprimé avec succès'], 200);
     }
 }
