@@ -21,5 +21,16 @@ class AdvertisementController extends Controller
         $Advertisement = Advertisement::create($request->all());
         return response()->json($Advertisement, 201);
     }
+
+    public function show($id)
+    {
+        $advertisement = Advertisement::with('company')->find($id);
+
+        if (!$advertisement) {
+            return response()->json(['message' => 'Annonce non trouvée'], 404);
+        }
+
+        return response()->json($advertisement, 200);
+    }
 }
 
