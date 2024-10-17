@@ -75,7 +75,6 @@ class UserController extends Controller
         }
     }
 
-
     public function update(Request $request, $id)
     {
         // Trouver l'utilisateur par son ID
@@ -131,9 +130,7 @@ class UserController extends Controller
             'data' => $user
         ], 200);
     }
-
-
-
+  
     public function destroy($id)
     {
         $user = User::find($id);

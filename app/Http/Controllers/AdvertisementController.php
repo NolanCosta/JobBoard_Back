@@ -113,5 +113,16 @@ class AdvertisementController extends Controller
 
         return response()->json(['message' => 'Annonce supprimé avec succès'], 200);
     }
+
+    public function show($id)
+    {
+        $advertisement = Advertisement::with('company')->find($id);
+
+        if (!$advertisement) {
+            return response()->json(['message' => 'Annonce non trouvée'], 404);
+        }
+
+        return response()->json($advertisement, 200);
+    }
 }
 

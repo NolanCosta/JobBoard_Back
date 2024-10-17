@@ -21,7 +21,7 @@ return new class extends Migration
             $table->text('message');
             $table->enum('status', ['SENT', 'ACCEPTED', 'REFUSED']);
             $table->foreignId('user_id')
-            ->constrained()
+            ->nullable()
             ->onDelete('cascade');
             $table->foreignId('advertisement_id')
             ->constrained()
