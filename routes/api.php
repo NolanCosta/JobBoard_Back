@@ -41,9 +41,9 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::get('userAdmin', [UserController::class, 'index']);
     Route::delete('user/delete/{id}', [UserController::class, 'destroy']);
 
-    Route::delete('/annonce/delete/{id}', [AdvertisementController::class, 'destroy']);
-    Route::put('/annonce/{id}', [AdvertisementController::class, 'update']);
-    Route::post('/annonce/create', [AdvertisementController::class, 'store']);
+    Route::delete('/advertisement/delete/{id}', [AdvertisementController::class, 'destroy']);
+    Route::put('/advertisement/{id}', [AdvertisementController::class, 'update']);
+    Route::post('/advertisement/create', [AdvertisementController::class, 'store']);
 
     Route::put('/company/{id}', [CompanyController::class, 'update']);
 
