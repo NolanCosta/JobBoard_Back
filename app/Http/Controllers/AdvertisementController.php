@@ -31,7 +31,6 @@ class AdvertisementController extends Controller
             'zip_code' => 'required|string|max:10',
             'city' => 'required|string|max:100',
             'status' => 'required|boolean',
-            'company_id' => 'required|integer|exists:companies,id'
         ]);
 
         // Retourner les erreurs de validation
@@ -78,7 +77,6 @@ class AdvertisementController extends Controller
             'zip_code' => 'string|max:10',
             'city' => 'string|max:100',
             'status' => 'boolean',
-            'company_id' => 'integer|exists:companies,id'
         ]);
 
         // Retourner les erreurs de validation
@@ -90,8 +88,23 @@ class AdvertisementController extends Controller
             ], 400);
         }
 
-        // Mettre à jour l'annonce avec les nouvelles données
-        $annonce->update($request->all());
+        // Mettre à jour les informations de l'entité
+        $advertisement->update([
+
+        'title' => $request->title ?? $advertisement->title,
+        'type' => $request->type ?? $advertisement->type,
+        'sector' => $request->sector ?? $advertisement->sector,
+        'description' => $request->description ?? $advertisement->description,
+        'wage' => $request->wage ?? $advertisement->wage,
+        'working_time' => $request->working_time ?? $advertisement->working_time,
+        'skills' => $request->skills ?? $advertisement->skills,
+        'tags' => $request->tags ?? $advertisement->tags,
+        'zip_code' => $request->zip_code ?? $advertisement->zip_code,
+        'city' => $request->city ?? $advertisement->city,
+        'status' => $request->status ?? $advertisement->status,
+        'company_id' => $request->company_id ?? $advertisement->company_id
+    ]);
+
 
         return response()->json([
             'success' => true,
