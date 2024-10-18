@@ -93,10 +93,10 @@ class UserController extends Controller
             'lastname' => 'string|max:255',
             'email' => 'email|unique:users,email,'.$user->id, // Ignorer l'email actuel
             'phone' => 'string|max:15',
-            'address' => 'string|max:255',
-            'zip_code' => 'string|max:10',
-            'city' => 'string|max:100',
-            'password' => 'nullable|string|min:8', // Le mot de passe n'est pas obligatoire
+            'address' => 'nullable|string|max:255',
+            'zip_code' => 'nullable|string|max:5',
+            'city' => 'nullable|string|max:100',
+            'password' => 'nullable|string', // Le mot de passe n'est pas obligatoire
             'role' => 'string',
             'company_id' => 'nullable|integer|exists:companies,id'
         ]);
@@ -119,7 +119,7 @@ class UserController extends Controller
             'address' => $request->address ?? $user->address,
             'zip_code' => $request->zip_code ?? $user->zip_code,
             'city' => $request->city ?? $user->city,
-            'password' => $request->password ? Hash::make($request->password) : $user->password, // Si le mot de passe est envoyé, le hacher
+            'password' => $request->password ? bcrypt($request->password) : $user->password,
             'role' => $request->role ?? $user->role,
             'company_id' => $request->company_id ?? $user->company_id
         ]);
