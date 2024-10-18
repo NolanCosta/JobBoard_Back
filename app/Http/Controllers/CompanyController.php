@@ -32,7 +32,6 @@ class CompanyController extends Controller
                     return response()->json(['message' => 'Une entreprise avec ce nom existe déjà.'], 400);
                 }
 
-                // dd($request->all());
                 $company = Company::create([
                     'name' => $request->name,
                     'address' => $request->address,
