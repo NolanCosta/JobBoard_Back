@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 use App\Models\FollowAdvertisement;
 use App\Models\Advertisement;
 
@@ -49,7 +50,16 @@ class FollowAdvertisementController extends Controller
             
             $followAdvertisement = FollowAdvertisement::create($data);
 
-            return response()->json(['message' => 'Postulation effectuée avec succès'], 201);
+            try {
+                Mail::send('email.name', ['data1' => $data], function($m) use ($data, $advertisement) {
+                    $m->to($data['email'])->subject('Candidature pour le poste de ' . $advertisement->title);
+                });
+            
+                return response()->json(['message' => 'Candidature effectuée avec succès'], 201);
+            
+            } catch (\Exception $e) {
+                return response()->json(['message' => 'Erreur lors de l\'envoi de l\'email : ' . $e->getMessage()], 500);
+            }
         } catch (\Exception $e) {
             return response()->json(['message' => $e->getMessage()], 500);
         }
