@@ -61,6 +61,17 @@ class AdvertisementController extends Controller
         ], 201);
     }
 
+    public function show($id)
+    {
+        $advertisement = Advertisement::with('company')->find($id);
+
+        if (!$advertisement) {
+            return response()->json(['message' => 'Annonce non trouvée'], 404);
+        }
+
+        return response()->json($advertisement, 200);
+    }
+
     public function update(Request $request, $id)
     {
         $advertisement = Advertisement::find($id);
@@ -128,17 +139,6 @@ class AdvertisementController extends Controller
         $Advertisement->delete();
 
         return response()->json(['message' => 'Annonce supprimé avec succès'], 200);
-    }
-
-    public function show($id)
-    {
-        $advertisement = Advertisement::with('company')->find($id);
-
-        if (!$advertisement) {
-            return response()->json(['message' => 'Annonce non trouvée'], 404);
-        }
-
-        return response()->json($advertisement, 200);
     }
 }
 

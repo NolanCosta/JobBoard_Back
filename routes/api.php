@@ -13,10 +13,10 @@ Route::post('user/login', [UserController::class, 'auth']);
 Route::get('company', [CompanyController::class, 'index']);
 Route::get('company/{id}', [CompanyController::class, 'show']);
 
-Route::get('/advertisement', [AdvertisementController::class, 'index']);
-Route::get('/advertisement/{id}', [AdvertisementController::class, 'show']);
+Route::get('advertisement', [AdvertisementController::class, 'index']);
+Route::get('advertisement/{id}', [AdvertisementController::class, 'show']);
 
-Route::post('followAdvertisement', [FollowAdvertisementController::class, 'store']);
+Route::post('followAdvertisement/create', [FollowAdvertisementController::class, 'store']);
 
 
 Route::middleware('auth:sanctum')->group(function () {
@@ -28,6 +28,8 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     
     Route::post('user/logout', [UserController::class, 'logout']);
+
+    Route::get('userAdmin', [UserController::class, 'index']);
     Route::post('user/create', [UserController::class, 'store']);
     Route::put('user/update/{id}', [UserController::class, 'update']);
     Route::delete('user/delete/{id}', [UserController::class, 'destroy']);
@@ -36,13 +38,11 @@ Route::middleware('auth:sanctum')->group(function () {
     Route::put('company/update/{id}', [CompanyController::class, 'update']);
     Route::delete('company/delete/{id}', [CompanyController::class, 'destroy']);
 
-    Route::get('userAdmin', [UserController::class, 'index']);
-    Route::delete('user/delete/{id}', [UserController::class, 'destroy']);
-
+    Route::post('advertisement/create', [AdvertisementController::class, 'store']);
+    Route::put('advertisement/update/{id}', [AdvertisementController::class, 'update']);
     Route::delete('/advertisement/delete/{id}', [AdvertisementController::class, 'destroy']);
-    Route::put('/advertisement/{id}', [AdvertisementController::class, 'update']);
-    Route::post('/advertisement/create', [AdvertisementController::class, 'store']);
 
-    Route::put('/company/{id}', [CompanyController::class, 'update']);
-
+    Route::get('followAdvertisement', [FollowAdvertisementController::class, 'index']);
+    Route::put('followAdvertisement/update/{id}', [FollowAdvertisementController::class, 'update']);
+    Route::delete('followAdvertisement/delete/{id}', [FollowAdvertisementController::class, 'destroy']);
 });

@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('email');
             $table->string('phone');
             $table->text('message');
-            $table->enum('status', ['SENT', 'ACCEPTED', 'REFUSED']);
+            $table->enum('status', ['SENT', 'ACCEPTED', 'REFUSED'])->default('SENT');;
             $table->foreignId('user_id')
             ->nullable()
             ->onDelete('cascade');
