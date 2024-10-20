@@ -77,7 +77,6 @@ class UserController extends Controller
 
     public function update(Request $request, $id)
     {
-        // Trouver l'utilisateur par son ID
         $user = User::find($id);
 
         if (!$user) {
