@@ -18,23 +18,20 @@ class AdvertisementController extends Controller
 
     public function store(Request $request)
     {
-        // Valider les données du formulaire
         $validator = Validator::make($request->all(), [
             'title' => 'required|string|max:255',
             'type' => 'required|string',
             'sector' => 'required|string',
             'description' => 'required|string',
-            'wage' => 'required|numeric',
-            'working_time' => 'required|string',
-            'skills' => 'required|string',
-            'tags' => 'nullable|string',
+            'wage' => 'nullable|integer',
+            'working_time' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'tags' => 'nullable|array',
             'zip_code' => 'required|string|max:10',
             'city' => 'required|string|max:100',
-            'status' => 'required|boolean',
             'company_id' => 'required|integer|exists:companies,id'
         ]);
 
-        // Retourner les erreurs de validation
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -43,8 +40,19 @@ class AdvertisementController extends Controller
             ], 400);
         }
 
-        // Créer l'annonce
-        $advertisement = Advertisement::create($request->all());
+        $advertisement = Advertisement::create([
+            'title' => $request->title,
+            'type' => $request->type,
+            'sector' => $request->sector,
+            'description' => $request->description,
+            'wage' => $request->wage,
+            'working_time' => $request->working_time,
+            'skills' => json_encode($request->skills),
+            'tags' => json_encode($request->tags),
+            'zip_code' => $request->zip_code,
+            'city' => $request->city,
+            'company_id' => $request->company_id,
+        ]);
 
         return response()->json([
             'success' => true,
@@ -53,9 +61,19 @@ class AdvertisementController extends Controller
         ], 201);
     }
 
+    public function show($id)
+    {
+        $advertisement = Advertisement::with('company')->find($id);
+
+        if (!$advertisement) {
+            return response()->json(['message' => 'Annonce non trouvée'], 404);
+        }
+
+        return response()->json($advertisement, 200);
+    }
+
     public function update(Request $request, $id)
     {
-        // Trouver l'annonce par son ID
         $advertisement = Advertisement::find($id);
 
         if (!$advertisement) {
@@ -65,23 +83,21 @@ class AdvertisementController extends Controller
             ], 404);
         }
 
-        // Validation des données à mettre à jour
         $validator = Validator::make($request->all(), [
-            'title' => 'string|max:255',
-            'type' => 'string',
-            'sector' => 'string',
-            'description' => 'string',
-            'wage' => 'numeric',
-            'working_time' => 'string',
-            'skills' => 'string',
-            'tags' => 'nullable|string',
-            'zip_code' => 'string|max:10',
-            'city' => 'string|max:100',
-            'status' => 'boolean',
-            'company_id' => 'integer|exists:companies,id'
+            'title' => 'required|string|max:255',
+            'type' => 'required|string',
+            'sector' => 'required|string',
+            'description' => 'required|string',
+            'wage' => 'nullable|integer',
+            'working_time' => 'nullable|string',
+            'skills' => 'nullable|array',
+            'tags' => 'nullable|array',
+            'zip_code' => 'required|string|max:10',
+            'city' => 'required|string|max:100',
+            'company_id' => 'required|integer|exists:companies,id'
         ]);
 
-        // Retourner les erreurs de validation
+        
         if ($validator->fails()) {
             return response()->json([
                 'success' => false,
@@ -89,9 +105,20 @@ class AdvertisementController extends Controller
                 'errors' => $validator->errors()
             ], 400);
         }
-
-        // Mettre à jour l'annonce avec les nouvelles données
-        $annonce->update($request->all());
+        
+        $advertisement->update([
+            'title' => $request->title ?? $advertisement->title,
+            'type' => $request->type ?? $advertisement->type,
+            'sector' => $request->sector ?? $advertisement->sector,
+            'description' => $request->description ?? $advertisement->description,
+            'wage' => $request->wage ?? $advertisement->wage,
+            'working_time' => $request->working_time ?? $advertisement->working_time,
+            'skills' => json_encode($request->skills) ?? $advertisement->skills,
+            'tags' => json_encode($request->tags) ?? $advertisement->tags,
+            'zip_code' => $request->zip_code ?? $advertisement->zip_code,
+            'city' => $request->city ?? $advertisement->city,
+            'company_id' => $request->company_id ?? $advertisement->company_id,
+        ]);
 
         return response()->json([
             'success' => true,
@@ -112,17 +139,6 @@ class AdvertisementController extends Controller
         $Advertisement->delete();
 
         return response()->json(['message' => 'Annonce supprimé avec succès'], 200);
-    }
-
-    public function show($id)
-    {
-        $advertisement = Advertisement::with('company')->find($id);
-
-        if (!$advertisement) {
-            return response()->json(['message' => 'Annonce non trouvée'], 404);
-        }
-
-        return response()->json($advertisement, 200);
     }
 }
 
