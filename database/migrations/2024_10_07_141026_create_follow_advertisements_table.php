@@ -14,9 +14,14 @@ return new class extends Migration
         Schema::create('follow_advertisements', function (Blueprint $table) {
             $table->id();
             $table->text('email_sent');
-            $table->enum('status', ['SENT', 'ACCEPTED', 'REFUSED']);
+            $table->string('lastname');
+            $table->string('firstname');
+            $table->string('email');
+            $table->string('phone');
+            $table->text('message');
+            $table->enum('status', ['SENT', 'ACCEPTED', 'REFUSED'])->default('SENT');;
             $table->foreignId('user_id')
-            ->constrained()
+            ->nullable()
             ->onDelete('cascade');
             $table->foreignId('advertisement_id')
             ->constrained()
