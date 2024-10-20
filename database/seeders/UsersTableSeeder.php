@@ -17,16 +17,32 @@ class UsersTableSeeder extends Seeder
     {
         DB::table('users')->insert([
             [
-                'firstname' => 'Jean',
-                'lastname' => 'Dupont',
-                'email' => 'jean.dupont@example.com',
+                'firstname' => 'Melia',
+                'lastname' => 'Reriouedj',
+                'email' => 'melia.reri@example.com',
                 'email_verified_at' => now(),
                 'phone' => '0601020304',
                 'address' => '123 Rue de Paris',
-                'zip_code' => '75001',
-                'city' => 'Paris',
+                'zip_code' => '06500',
+                'city' => 'Menton',
                 'password' => Hash::make('password123'), // Crypter le mot de passe
-                'role' => 'USER',
+                'role' => 'ADMIN',
+                'remember_token' => \Str::random(10),
+                'created_at' => now(),
+                'updated_at' => now(),
+            ],
+
+            [
+                'firstname' => 'Nolan',
+                'lastname' => 'Costa',
+                'email' => 'nolan.costa@example.com',
+                'email_verified_at' => now(),
+                'phone' => '0678787867',
+                'address' => '123 Rue de Paris',
+                'zip_code' => '06600',
+                'city' => 'Grasse',
+                'password' => Hash::make('password123'), // Crypter le mot de passe
+                'role' => 'ADMIN',
                 'remember_token' => \Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
@@ -46,21 +62,7 @@ class UsersTableSeeder extends Seeder
                 'created_at' => now(),
                 'updated_at' => now(),
             ],
-            [
-                'firstname' => 'Marc',
-                'lastname' => 'Leclerc',
-                'email' => 'marc.leclerc@example.com',
-                'email_verified_at' => now(),
-                'phone' => '0611121314',
-                'address' => '77 Rue de la République',
-                'zip_code' => '13001',
-                'city' => 'Marseille',
-                'password' => Hash::make('password123'),
-                'role' => 'ADMIN',
-                'remember_token' => \Str::random(10),
-                'created_at' => now(),
-                'updated_at' => now(),
-            ],
+          
             [
                 'firstname' => 'Sophie',
                 'lastname' => 'Moreau',
