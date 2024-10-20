@@ -54,12 +54,15 @@ class CompanyController extends Controller
             try {
                 $request->validate([
                     'company_id' => 'required|string',
-                ]);
+                ]); 
 
-                $request->user()->update([
-                    'company_id' => $request->company_id,
-                    'role' => 'PRO'
-                ]);
+                if ($request->user()->role !== 'ADMIN') {
+                    $request->user()->update([
+                        'company_id' => $request->company_id,
+                        'role' => 'PRO'
+                    ]);
+                }
+ 
 
                 $company = Company::where('id', $request->company_id)->first();
 
