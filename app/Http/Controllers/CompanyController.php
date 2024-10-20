@@ -41,10 +41,12 @@ class CompanyController extends Controller
                     'user_id' => $request->user()->id,
                 ]);
 
-                $request->user()->update([
-                    'company_id' => $company->id,
-                    'role' => 'PRO'
-                ]);
+                if ($request->user()->role !== 'ADMIN') {
+                    $request->user()->update([
+                        'company_id' => $company->id,
+                        'role' => 'PRO'
+                    ]);
+                }
 
                 return response()->json(['message' => 'Companie créée avec succès'], 201);
             } catch (\Exception $e) {
