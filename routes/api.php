@@ -18,8 +18,6 @@ Route::get('/advertisement/{id}', [AdvertisementController::class, 'show']);
 
 Route::post('followAdvertisement', [FollowAdvertisementController::class, 'store']);
 
-Route::post('user/create', [UserController::class, 'store']);
-Route::put('/user/{id}', [UserController::class, 'update']);
 
 Route::middleware('auth:sanctum')->group(function () {
     Route::get('user', function (Request $request) {
@@ -30,11 +28,11 @@ Route::middleware('auth:sanctum')->group(function () {
     });
     
     Route::post('user/logout', [UserController::class, 'logout']);
+    Route::post('user/create', [UserController::class, 'store']);
     Route::put('user/update/{id}', [UserController::class, 'update']);
     Route::delete('user/delete/{id}', [UserController::class, 'destroy']);
     
     Route::post('company/create' , [CompanyController::class, 'store']);
-    Route::post('company/store' , [CompanyController::class, 'store']);
     Route::put('company/update/{id}', [CompanyController::class, 'update']);
     Route::delete('company/delete/{id}', [CompanyController::class, 'destroy']);
 
