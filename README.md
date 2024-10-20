@@ -1,6 +1,8 @@
-<!-- Initialisation du projet -->
+## Initialisation du projet
 
 commande a effectuer dans le terminal :
+
+-   Vérifiez que vous ayez bien installé composer sur votre machine
 
 -   composer install (installation des dépendances liées au projet)
 
@@ -30,9 +32,9 @@ commande a effectuer dans le terminal :
 
 -   php artisan serve (lancement du serveur)
 
-<!-- Méthode MCV de Laravel (Model, View, Controller -->
+## Méthode MCV de Laravel (Model, View, Controller)
 
-<!-- Models -->
+## Models
 
 Les modèles dans Laravel représentent les tables de la base de données et facilitent les opérations CRUD grâce à l'ORM Eloquent (le système de gestion des bases de données intégré à Laravel). Ils permettent de valider les données, de définir des relations entre entités, et d'utiliser des accesseurs et mutateurs pour manipuler les attributs. En simplifiant les requêtes et en intégrant des scopes, les modèles offrent une abstraction puissante pour gérer les données tout en améliorant la lisibilité et la maintenance du code.
 
@@ -48,11 +50,11 @@ Propriétés de la classe : - La propriété $fillable est un tableau qui défin
 
 Méthode de relation : - Dans le Model "Advertisement", la function company() définit une relation entre le modèle Advertisement et un autre modèle appelé Company. La méthode belongsTo indique que chaque annonce appartient à une seule entreprise. Cela signifie que chaque enregistrement d'annonce a un champ company_id qui référence l'ID de l'entreprise associée. - Dans le Model "User", la function casts() définit comment certains attributs doivent être castés (transformés) lors de leur utilisation. Par exemple, email_verified_at sera traité comme un objet datetime, et le mot de passe sera automatiquement haché.
 
-<!-- Views -->
+## Views
 
 Du côté de Back-end, il y a seulement le fichier name.blade.php qui correspond au message envoyer dans le mail lors du candidature envoyée. Pour le reste, les views sont réalisées avec ReactJS.
 
-<!-- Controllers -->
+## Controllers
 
 UserController :
 
@@ -199,9 +201,9 @@ FollowAdvertisementController :
     Suppression : Si la candidature est trouvée, elle est supprimée de la base de données.
     Retourne : Un message de succès ou une erreur si la candidature n'est pas trouvée.
 
-<!-- Base de données -->
+## Base de données
 
-<!-- Migrations -->
+## Migrations
 
 Les migrations dans Laravel permettent de gérer la structure de la base de données de manière versionnée. Elles sont particulièrement utiles pour créer, modifier ou supprimer des tables et des colonnes.
 
@@ -311,7 +313,7 @@ Table follow_advertisements :
         onDelete('cascade') : Si l'annonce est supprimée, les enregistrements associés dans cette table seront également supprimés.
     timestamps() : Ajoute les colonnes created_at et updated_at pour suivre la création et la mise à jour des enregistrements.
 
-<!-- Routes -->
+## Routes
 
 User Registration and Login:
 POST user/register: Permet à un nouvel utilisateur de s'inscrire en envoyant ses informations (comme l'email et le mot de passe).
@@ -340,10 +342,10 @@ POST user/create: Permet de créer un nouvel utilisateur.
 PUT user/update/{id}: Permet de mettre à jour les informations d'un utilisateur existant.
 DELETE user/delete/{id}: Permet de supprimer un utilisateur par son ID.
 
-<!-- Middleware -->
+## Middleware
 
 auth : Ce middleware protège les routes situées dans le groupe qui lui est associé. Cela signifie que seules les requêtes authentifiées (celles ayant un token d'authentification valide) peuvent accéder à ces routes. Lorsqu'un utilisateur se connecte, un token est généré. Il doit être inclus dans l'en-tête des requêtes pour accéder aux routes sécurisées. Cela permet de s'assurer que seules les actions autorisées peuvent être exécutées par des utilisateurs authentifiés, comme la création, la mise à jour ou la suppression d'objets (utilisateurs, entreprises, publicités, etc.).
 
-<!-- .env -->
+## .env
 
 Le fichier .env dans un projet Laravel est utilisé pour gérer les variables d'environnement, ce qui permet de configurer l'application sans avoir à modifier le code source.
