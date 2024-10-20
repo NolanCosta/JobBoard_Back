@@ -134,18 +134,6 @@ class CompanyController extends Controller
             ], 400);
         }
 
-        // // Traitement du logo s'il est présent
-        // if ($request->hasFile('logo')) {
-        //     // Supprimer l'ancien logo si nécessaire
-        //     if ($company->logo) {
-        //         Storage::delete($company->logo); // Supposant que le logo est stocké dans un storage
-        //     }
-
-        //     // Enregistrer le nouveau logo
-        //     $logoPath = $request->file('logo')->store('logos'); // Stocker le fichier logo
-        //     $company->logo = $logoPath;
-        // }
-
         // Mettre à jour les informations de l'entreprise
         $company->update([
             'name' => $request->name ?? $company->name,
